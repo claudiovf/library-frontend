@@ -43,7 +43,7 @@ const Authors = (props) => {
           )}
         </tbody>
       </table>
-      <EditAuthor setError={props.setError} />
+      <EditAuthor setError={props.setError} token={props.token}/>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import {useMutation, useQuery } from '@apollo/client'
 
 import { EDIT_AUTHOR, ALL_AUTHORS } from '../queries'
 
-const EditAuthor = () => {
+const EditAuthor = (props) => {
 
     const authors = useQuery(ALL_AUTHORS)
 
@@ -24,6 +24,10 @@ const EditAuthor = () => {
 
         setYear('')
         setName('')
+    }
+
+    if (!props.token) {
+        return null
     }
 
     return(
