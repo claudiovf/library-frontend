@@ -10,17 +10,25 @@ export const ALL_AUTHORS = gql`
     }
 `
 
+const BOOK_DETAILS = gql`
+    fragment BookDetails on Book {
+        id
+        title
+        author {
+            name
+        }
+        published
+        genres
+    }
+`
+
 export const ALL_BOOKS = gql`
     query {
         allBooks {
-            title
-            published
-            author {
-                name
-            }
-            genres
+            ...BookDetails
         }
     }
+    ${BOOK_DETAILS}
 `
 
 export const GEN_BOOKS = gql`
@@ -28,14 +36,10 @@ export const GEN_BOOKS = gql`
         allBooks(
             genre: $genre
         ) {
-            title
-            published
-            author {
-                name
-            }
-            genres
+            ...BookDetails
         }
     }
+    ${BOOK_DETAILS}
 `
 
 export const ADD_BOOK = gql`
@@ -46,14 +50,10 @@ export const ADD_BOOK = gql`
             published: $published,
             genres: $genres
         ) {
-            title
-            published
-            author {
-                name
-            }
-            genres
+            ...BookDetails
         }
     }
+    ${BOOK_DETAILS}
 `
 
 export const EDIT_AUTHOR = gql`
@@ -86,4 +86,13 @@ export const GET_ME = gql`
             favoriteGenre
         }
     }
+`
+
+export const BOOK_ADDED = gql`
+    subscription {
+        bookAdded {
+            ...BookDetails
+        }
+    }
+    ${BOOK_DETAILS}
 `
